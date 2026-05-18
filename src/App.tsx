@@ -32,14 +32,12 @@ import { ThemeButton } from './components/ThemeButton';
 import { Home } from './components/Home';
 import { Hasil } from './components/Hasil';
 import { homeService } from './services/home';
-import { Modul1 } from './components/Modul1';
-import { Modul2 } from './components/Modul2';
-import { Modul3 } from './components/Modul3';
-import { Modul4 } from './components/Modul4';
-import { Modul5 } from './components/Modul5';
-import { Modul6 } from './components/Modul6';
-import { Modul7 } from './components/Modul7';
-import { Modul8 } from './components/Modul8';
+import { Identitas } from './components/Identitas';
+import { Keunggulan } from './components/Keunggulan';
+import { Pendaftaran } from './components/Pendaftaran';
+import { Persyaratan } from './components/Persyaratan';
+import { Kontak } from './components/Kontak';
+import { Brosur } from './components/Brosur';
 import { VideoPlayer } from './components/VideoPlayer';
 import { googleFormService } from './services/googleFormService';
 import { RekapNilai } from './components/RekapNilai';
@@ -399,7 +397,7 @@ const App = () => {
       <motion.aside 
         initial={false}
         animate={{ x: (sidebarOpen && currentView !== 'material') ? 0 : -300 }}
-        className={`${currentView === 'material' ? 'hidden' : 'fixed md:relative'} w-[230px] h-screen z-50 flex flex-col transition-colors duration-500 shadow-2xl md:shadow-none`}
+        className={`${currentView === 'material' ? 'hidden' : 'fixed md:relative'} w-[230px] h-screen z-50 flex flex-col transition-colors duration-500 shadow-[10px_0_30px_rgba(0,0,0,0.4)] rounded-tr-[2.5rem] rounded-br-[2.5rem] border-r border-t border-b border-white/20 overflow-hidden`}
         style={{ backgroundColor: theme.bgSidebar, color: theme.textSidebar }}
       >
         {/* Sidebar Header */}
@@ -456,31 +454,39 @@ const App = () => {
           {/* Main Menu */}
           <div className="space-y-0.5">
             <label className="px-3 text-[9px] font-black opacity-40 uppercase tracking-[0.2em] mb-1.5 block">Informasi SPMB</label>
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((num, idx) => (
-              <React.Fragment key={num}>
+            {[
+              { id: 1, name: 'IDENTITAS' },
+              { id: 2, name: 'KEUNGGULAN' },
+              { id: 3, name: 'PENDAFTARAN' },
+              { id: 4, name: 'PERSYARATAN' },
+              { id: 5, name: 'KONTAK' },
+              { id: 6, name: 'BROSUR' },
+            ].map((mod, idx) => (
+              <React.Fragment key={mod.id}>
                 <button 
-                  onClick={() => openModule(num)}
-                  className={`w-full flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all ${currentView === 'modul' && activeModule === num ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
+                  onClick={() => openModule(mod.id)}
+                  className={`w-full flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all ${currentView === 'modul' && activeModule === mod.id ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
                 >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${currentView === 'modul' && activeModule === num ? 'bg-white text-indigo-600' : 'bg-white/10'}`}>
-                    {currentView === 'modul' && activeModule === num ? <Icons.BookOpen size={18} /> : (
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${currentView === 'modul' && activeModule === mod.id ? 'bg-white text-indigo-600' : 'bg-white/10'}`}>
+                    {currentView === 'modul' && activeModule === mod.id ? <Icons.BookOpen size={18} /> : (
                       !logoError ? (
                         <img 
                           src="https://i.ibb.co.com/kVLW5n61/logo-smpn-1-bengkalis-kecil-Copy.png" 
                           alt="Logo SMP" 
                           className="w-5 h-5 object-contain"
                           referrerPolicy="no-referrer"
+                          onError={() => setLogoError(true)}
                         />
                       ) : (
                         <Icons.School size={16} className="opacity-50" />
                       )
                     )}
                   </div>
-                  <div className="flex flex-col items-start">
-                    <span className="font-bold text-sm">BAGIAN {num}</span>
+                  <div className="flex flex-col items-start text-left">
+                    <span className="font-bold text-sm">{mod.name}</span>
                   </div>
                 </button>
-                {idx < 7 && (
+                {idx < 5 && (
                   <div className="mx-6 my-0.5">
                     <div 
                       className="h-[2px] w-full bg-white/30" 
@@ -540,7 +546,7 @@ const App = () => {
               title="Editor Tema"
             >
               <Palette size={14} />
-              <span>Tema</span>
+              <span>TEMA</span>
             </button>
             <button 
               onClick={() => {
@@ -609,7 +615,7 @@ const App = () => {
                 exit={{ opacity: 0, x: -20 }}
               >
                 {activeModule === 1 && (
-                  <Modul1 
+                  <Identitas 
                     theme={theme} 
                     username={username}
                     userClass={userClass}
@@ -623,25 +629,19 @@ const App = () => {
                   />
                 )}
                 {activeModule === 2 && (
-                  <Modul2 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
+                  <Keunggulan theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 3 && (
-                  <Modul3 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
+                  <Pendaftaran theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 4 && (
-                  <Modul4 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
+                  <Persyaratan theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 5 && (
-                  <Modul5 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
+                  <Kontak theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
                 {activeModule === 6 && (
-                  <Modul6 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
-                )}
-                {activeModule === 7 && (
-                  <Modul7 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
-                )}
-                {activeModule === 8 && (
-                  <Modul8 theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
+                  <Brosur theme={theme} username={username} userClass={userClass} searchQuery={searchQuery} moduleNumber={activeModule} onRedirect={handleModuleRedirect} onComplete={() => setCurrentView('home')} />
                 )}
               </motion.div>
             )}

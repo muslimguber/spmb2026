@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, CheckCircle2, ArrowRight, Lock, ChevronRight, ChevronLeft, Trophy, X } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ChevronLeft, Trophy, X } from 'lucide-react';
 import { Theme } from '../types';
 import { VideoPlayer } from './VideoPlayer';
-import { FinalQuiz } from './FinalQuiz';
-import { Quis1 } from './Quis1';
-import { Quis2 } from './Quis2';
-import { Game1 } from './Game1';
-import { Game2 } from './Game2';
-import { MemoryGame } from './MemoryGame';
 import { ThemeButton } from './ThemeButton';
 
 const PRAISES = [
@@ -240,7 +234,7 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
             >
               {isActive ? (
                 <span className="whitespace-nowrap">
-                  {page.isFinalQuiz ? 'Kuis Akhir' : page.isGame ? 'Game' : `Hal ${index + 1}`}
+                  {`Hal ${index + 1}`}
                 </span>
               ) : (
                 <span>{index + 1}</span>
@@ -253,157 +247,16 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
 
       <div className="flex-1 flex flex-col justify-center">
         <AnimatePresence mode="wait">
-          {currentPage.isFinalQuiz ? (
-            <motion.div key="final" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              {moduleNumber === 1 ? (
-                <Quis1 
-                  theme={theme}
-                  username={username} 
-                  userClass={userClass} 
-                  onComplete={() => onComplete()}
-                />
-              ) : Number(moduleNumber) === 2 ? (
-                <Quis2 
-                  theme={theme}
-                  username={username} 
-                  userClass={userClass} 
-                  onComplete={() => onComplete()}
-                />
-              ) : (
-                <FinalQuiz 
-                  theme={theme}
-                  moduleNumber={moduleNumber}
-                  username={username} 
-                  userClass={userClass} 
-                  onComplete={() => onComplete()}
-                />
-              )}
-            </motion.div>
-          ) : currentPage.isGame ? (
-            <motion.div key="game" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
-              {moduleNumber === 1 ? (
-                <div className="space-y-6">
-                  <Game1 
-                    searchQuery={searchQuery}
-                    onLevelChange={(lvl) => setGameLevel(lvl)}
-                    onGameComplete={(isFullComplete) => {
-                      setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
-                      setShowPopup({
-                        show: true,
-                        type: 'success',
-                        praise: isFullComplete ? 'KAMU TIDAK ADA LAWAN' : PRAISES[Math.floor(Math.random() * PRAISES.length)],
-                        message: isFullComplete ? 'Luar biasa, kamu sang legenda!' : ''
-                      });
-                    }}
-                  />
-                  
-                  <div className="flex flex-row gap-2 justify-center max-w-[400px] mx-auto">
-                    <ThemeButton 
-                      theme={theme}
-                      variant="secondary"
-                      onClick={() => {
-                        setActivePage(activePage - 1);
-                        setQuizActive(false);
-                      }}
-                      className="flex-1 px-2 text-sm sm:text-base py-3"
-                    >
-                      <ChevronLeft size={18} />
-                      <span className="hidden xs:inline">Kembali</span>
-                    </ThemeButton>
-
-                    <ThemeButton
-                      theme={theme}
-                      disabled={gameLevel < 4 || quizDelay}
-                      onClick={() => {
-                        setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
-                        if (activePage < data.pages.length - 1) {
-                          setActivePage(activePage + 1);
-                        } else {
-                          onComplete();
-                        }
-                      }}
-                      className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50 disabled:grayscale"
-                    >
-                      <span className="hidden xs:inline text-white">LANJUT</span>
-                      <ChevronRight size={18} className="text-white" />
-                    </ThemeButton>
-                  </div>
-                </div>
-              ) : Number(moduleNumber) === 2 ? (
-                <div className="space-y-6">
-                  <Game2 
-                    searchQuery={searchQuery}
-                    onLevelChange={(lvl) => setGameLevel(lvl)}
-                    onGameComplete={(isFullComplete) => {
-                      setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
-                      if (isFullComplete) {
-                        setShowPopup({
-                          show: true,
-                          type: 'success',
-                          praise: 'KAMU SANG JUARA',
-                          message: 'Luar biasa! Kamu telah menyelesaikan semua level. Ayo lanjut ke Kuis Akhir Modul 2.'
-                        });
-                      }
-                    }}
-                  />
-                  
-                  <div className="flex flex-row gap-2 justify-center max-w-[400px] mx-auto">
-                    <ThemeButton 
-                      theme={theme}
-                      variant="secondary"
-                      onClick={() => {
-                        setActivePage(activePage - 1);
-                        setQuizActive(false);
-                      }}
-                      className="flex-1 px-2 text-sm sm:text-base py-3"
-                    >
-                      <ChevronLeft size={18} />
-                      <span className="hidden xs:inline">Kembali</span>
-                    </ThemeButton>
-
-                    <ThemeButton
-                      theme={theme}
-                      disabled={gameLevel < 4 || quizDelay}
-                      onClick={() => {
-                        setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
-                        if (activePage < data.pages.length - 1) {
-                          setActivePage(activePage + 1);
-                        } else {
-                          onComplete();
-                        }
-                      }}
-                      className="flex-1 px-2 text-sm sm:text-base py-3 disabled:opacity-50 disabled:grayscale"
-                    >
-                      <span className="hidden xs:inline text-white">LANJUT</span>
-                      <ChevronRight size={18} className="text-white" />
-                    </ThemeButton>
-                  </div>
-                </div>
-              ) : (
-                <MemoryGame 
-                  onLevelComplete={() => {}} 
-                />
-              )}
-              {moduleNumber !== 1 && Number(moduleNumber) !== 2 && (
-                <div className="mt-8 flex justify-center">
-                  <ThemeButton 
-                    theme={theme}
-                    disabled={quizDelay}
-                    onClick={() => {
-                      setCompletedPages(prev => prev.includes(activePage) ? prev : [...prev, activePage]);
-                      setShowPopup({
-                        show: true,
-                        type: 'success',
-                        praise: PRAISES[Math.floor(Math.random() * PRAISES.length)],
-                        message: ''
-                      });
-                    }}
-                    className="disabled:opacity-50"
-                  >
-                    Selesaikan Game & Lanjut
-                  </ThemeButton>
-                </div>
-              )}
+          {currentPage.isFinalQuiz || currentPage.isGame ? (
+            <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center p-10 bg-white/10 rounded-3xl backdrop-blur-md border border-white/20">
+              <h2 className="text-xl font-bold text-white mb-2">Konten Tidak Tersedia</h2>
+              <p className="text-white/60 mb-6">Bagian ini telah dihapus atau sedang dalam pembaruan.</p>
+              <ThemeButton theme={theme} onClick={() => {
+                if (activePage < data.pages.length - 1) setActivePage(activePage + 1);
+                else onComplete();
+              }}>
+                Lanjut ke Halaman Berikutnya
+              </ThemeButton>
             </motion.div>
           ) : (
             <motion.div 

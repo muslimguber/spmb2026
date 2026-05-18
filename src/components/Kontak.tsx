@@ -1,6 +1,6 @@
 import React from 'react';
 import { ModuleBase } from './ModuleBase';
-import { modul7Service } from '../services/modul7';
+import { modul5Service } from '../services/modul5';
 import { Theme } from '../types';
 
 interface ModulProps {
@@ -13,6 +13,6 @@ interface ModulProps {
   onRedirect?: (moduleNum: number, pageNum?: number) => void;
 }
 
-export const Modul7: React.FC<ModulProps> = (props) => (
-  <ModuleBase {...props} service={modul7Service} />
+export const Kontak: React.FC<ModulProps> = (props) => (
+  <ModuleBase {...props} service={modul5Service} />
 );
