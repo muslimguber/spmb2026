@@ -99,4 +99,28 @@
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
   }
+
+  .markdown-content h3 {
+    @apply text-2xl font-black mb-4 mt-2 border-b-2 pb-2 uppercase tracking-tight;
+    border-color: currentColor;
+  }
+  .markdown-content .registration-time {
+    @apply text-xl md:text-2xl font-black mb-6 block py-2 px-4 rounded-lg bg-black/10 border-l-4;
+    border-color: currentColor;
+  }
+  .markdown-content p {
+    @apply mb-4 leading-relaxed;
+  }
+  .markdown-content ol {
+    @apply list-decimal pl-6 mb-6 space-y-2;
+  }
+  .markdown-content ul {
+    @apply list-disc pl-6 mb-6 space-y-2;
+  }
+  .markdown-content strong {
+    @apply font-black;
+  }
+  .markdown-content em {
+    @apply italic opacity-80;
+  }
 }

@@ -11,22 +11,7 @@ export const modul1Service = {
         title: "Motivasi Sebelum Belajar",
         triggerQuestion: "Semangat adalah kunci keberhasilan.",
         videoUrl: "https://www.youtube.com/embed/3MhZsABZWr0",
-        content: "Sebelum kita mulai belajar tentang berkebun, mari kita saksikan video motivasi ini agar kita lebih bersemangat dalam menimba ilmu untuk masa depan kita sebagai generasi yang mandiri.",
-        quiz: {
-          question: "Apakah anda sudah semangat untuk belajar?",
-          options: [
-            {
-              id: 'YA',
-              text: "Sudah, saya siap belajar!",
-              isCorrect: true
-            },
-            {
-              id: 'TIDAK',
-              text: "Belum, saya mau nonton videonya lagi.",
-              isCorrect: false
-            }
-          ]
-        }
+        content: "Sebelum kita mulai belajar tentang berkebun, mari kita saksikan video motivasi ini agar kita lebih bersemangat dalam menimba ilmu untuk masa depan kita sebagai generasi yang mandiri."
       },
       {
         id: 9,
