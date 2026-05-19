@@ -1,5 +1,5 @@
 {
-  "name": "SPMB 2026/2027",
+  "name": "SPMB SMPN 1 BKS 2026-2027",
   "description": "Portal Informasi Sistem Penerimaan Murid Baru SMPN 1 Bengkalis Tahun Pelajaran 2026/2027",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
