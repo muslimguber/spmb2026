@@ -4,20 +4,25 @@
 
 export const modul1Service = {
   getIntroduction: () => ({
-    title: "Mengapa Berkebun itu Penting?",
+    title: "IDENTITAS",
     pages: [
       {
-        id: 0,
-        title: "Motivasi Sebelum Belajar",
-        triggerQuestion: "Semangat adalah kunci keberhasilan.",
-        videoUrl: "https://www.youtube.com/embed/3MhZsABZWr0",
-        content: "Sebelum kita mulai belajar tentang berkebun, mari kita saksikan video motivasi ini agar kita lebih bersemangat dalam menimba ilmu untuk masa depan kita sebagai generasi yang mandiri."
-      },
-      {
-        id: 9,
-        title: "Istirahat Sejenak: Game Memory Kebun",
-        content: "Mari segarkan pikiranmu sejenak dengan bermain game memory sebelum kuis akhir!",
-        isGame: true
+        id: 1,
+        title: "PROFIL SMP NEGERI 1 BENGKALIS",
+        bgColor: "rgba(30, 58, 138, 0.95)",
+        textColor: "#ffffff",
+        content: `
+SMP Negeri 1 Bengkalis merupakan salah satu sekolah menengah pertama tertua dan berprestasi di Kabupaten Bengkalis. Kami berkomitmen untuk menyelenggarakan pendidikan yang berkualitas, berkarakter, dan berwawasan lingkungan.
+
+**Visi:**
+"Terwujudnya Peserta Didik yang Berakhlak Mulia, Cerdas, Terampil, Mandiri dan Berwawasan Lingkungan"
+
+**Misi:**
+1. Menumbuhkembangkan penghayatan dan pengamalan nilai-nilai keagamaan.
+2. Melaksanakan pembelajaran dan bimbingan secara efektif.
+3. Mendorong dan membantu setiap siswa untuk mengenali potensi dirinya.
+4. Menanamkan budaya peduli lingkungan.
+`
       }
     ]
   })

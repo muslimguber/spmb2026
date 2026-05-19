@@ -30,7 +30,6 @@ import { ColorInput } from './components/ColorInput';
 import { Login } from './components/Login';
 import { ThemeButton } from './components/ThemeButton';
 import { Home } from './components/Home';
-import { Hasil } from './components/Hasil';
 import { homeService } from './services/home';
 import { Identitas } from './components/Identitas';
 import { Keunggulan } from './components/Keunggulan';
@@ -38,7 +37,6 @@ import { Pendaftaran } from './components/Pendaftaran';
 import { Persyaratan } from './components/Persyaratan';
 import { Kontak } from './components/Kontak';
 import { Brosur } from './components/Brosur';
-import { VideoPlayer } from './components/VideoPlayer';
 import { googleFormService } from './services/googleFormService';
 import { RekapNilai } from './components/RekapNilai';
 
@@ -662,10 +660,6 @@ const App = () => {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-6 pb-12 relative z-10 bg-black/10 backdrop-blur-md p-8 rounded-[2rem] border border-white/10 shadow-xl"
               >
-                {selectedMaterial.videoUrl && (
-                  <VideoPlayer url={selectedMaterial.videoUrl} title={selectedMaterial.title} />
-                )}
-
                 <div className="prose prose-invert prose-slate max-w-none">
                   <h1 className="text-3xl font-black tracking-tight mb-4">{selectedMaterial.title}</h1>
                   {!selectedMaterial.Component && (
@@ -829,16 +823,6 @@ const App = () => {
                 exit={{ opacity: 0, y: -20 }}
                 className="relative z-10"
               >
-                <Hasil 
-                  progress={progress} 
-                  allMaterials={ALL_MATERIALS} 
-                  theme={theme}
-                  onSelectMaterial={selectMaterial}
-                  onStartQuiz={(id) => {
-                    setSelectedMaterialId(id);
-                    startQuiz();
-                  }}
-                />
               </motion.div>
             )}
 

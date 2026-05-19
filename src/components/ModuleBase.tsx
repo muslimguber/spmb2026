@@ -4,7 +4,6 @@ import { CheckCircle2, ChevronRight, ChevronLeft, Trophy, X } from 'lucide-react
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { Theme } from '../types';
-import { VideoPlayer } from './VideoPlayer';
 import { ThemeButton } from './ThemeButton';
 
 const PRAISES = [
@@ -269,12 +268,12 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 }}
               >
                 <div className="text-center space-y-3">
-                  <h1 className={`font-black uppercase tracking-tight ${
+                  <h1 className={`font-black uppercase tracking-tight text-balance leading-tight ${
                     currentPage.titleSize === 'sm' ? 'text-sm' :
                     currentPage.titleSize === 'base' ? 'text-base' :
                     currentPage.titleSize === 'lg' ? 'text-lg' :
                     currentPage.titleSize === 'xl' ? 'text-xl' :
-                    'text-2xl'
+                    'text-3xl md:text-4xl'
                   }`}
                   style={{ color: currentPage.textColor || '#1e293b' }}
                   >
@@ -284,8 +283,6 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                     <p className="text-sm font-bold italic" style={{ color: currentPage.textColor || '#334155' }}>"{currentPage.triggerQuestion}"</p>
                   )}
                 </div>
-
-                {currentPage.videoUrl && <VideoPlayer url={currentPage.videoUrl} title={currentPage.title} />}
                 
                 {currentPage.isSheet && currentPage.sheetUrl && (
                   <div className="relative h-[600px] w-full bg-slate-100 rounded-2xl overflow-hidden border-2 border-slate-200 shadow-inner my-4">
@@ -303,13 +300,23 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                 </div>
 
                 <div className="flex justify-center pt-4">
-                  <ThemeButton
-                    theme={theme}
-                    onClick={() => onComplete()}
-                    className="px-8 py-3 text-sm font-black tracking-widest"
-                  >
-                    KEMBALI KE BERANDA
-                  </ThemeButton>
+                  {moduleNumber === 5 ? (
+                    <ThemeButton
+                      theme={theme}
+                      onClick={() => onComplete()}
+                      className="px-8 py-3 text-sm font-black tracking-widest"
+                    >
+                      KEMBALI KE BERANDA
+                    </ThemeButton>
+                  ) : (
+                    <ThemeButton
+                      theme={theme}
+                      onClick={() => onRedirect && onRedirect(5)}
+                      className="px-8 py-3 text-sm font-black tracking-widest"
+                    >
+                      HUBUNGI PANITIA
+                    </ThemeButton>
+                  )}
                 </div>
               </div>
 
