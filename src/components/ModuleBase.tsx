@@ -221,7 +221,6 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
             return (
               <motion.button
                 key={index}
-                layout
                 onClick={() => {
                   setActivePage(index);
                   setQuizActive(false);
@@ -303,12 +302,23 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                   <ReactMarkdown rehypePlugins={[rehypeRaw]}>{currentPage.content}</ReactMarkdown>
                 </div>
 
-                <div className="flex justify-center pt-4">
+                <div className="flex flex-wrap justify-center gap-3 pt-4">
+                  {moduleNumber === 4 && activePage > 0 && (
+                    <ThemeButton
+                      theme={theme}
+                      variant="secondary"
+                      onClick={() => setActivePage(activePage - 1)}
+                      className="px-6 py-3 text-[10px] md:text-sm font-black tracking-widest"
+                    >
+                      KEMBALI
+                    </ThemeButton>
+                  )}
+                  
                   {moduleNumber === 5 ? (
                     <ThemeButton
                       theme={theme}
                       onClick={() => onComplete()}
-                      className="px-8 py-3 text-sm font-black tracking-widest"
+                      className="px-6 py-3 text-[10px] md:text-sm font-black tracking-widest"
                     >
                       KEMBALI KE BERANDA
                     </ThemeButton>
@@ -316,9 +326,20 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
                     <ThemeButton
                       theme={theme}
                       onClick={() => onRedirect && onRedirect(5)}
-                      className="px-8 py-3 text-sm font-black tracking-widest"
+                      className="px-6 py-3 text-[10px] md:text-sm font-black tracking-widest"
                     >
                       HUBUNGI PANITIA
+                    </ThemeButton>
+                  )}
+
+                  {moduleNumber === 4 && activePage < data.pages.length - 1 && (
+                    <ThemeButton
+                      theme={theme}
+                      variant="secondary"
+                      onClick={() => setActivePage(activePage + 1)}
+                      className="px-6 py-3 text-[10px] md:text-sm font-black tracking-widest"
+                    >
+                      JALUR LAIN
                     </ThemeButton>
                   )}
                 </div>

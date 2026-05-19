@@ -434,21 +434,27 @@ const App = () => {
               <X size={18} />
             </button>
           </div>
-          {/* Search Bar */}
-          <div className="relative mt-4">
-            <Icons.Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 opacity-40" />
-            <input 
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari Info"
-              className="w-full bg-white/5 border border-white/10 rounded-lg py-1.5 pl-8 pr-2.5 text-[10px] font-bold outline-none focus:border-white/20 transition-all placeholder:opacity-40"
-            />
-          </div>
+          {/* Search Bar Removed */}
         </div>
 
         {/* Sidebar Menu */}
         <div className="flex-1 overflow-y-auto p-2.5 space-y-3 custom-scrollbar">
+          {/* Beranda Button */}
+          <div className="mb-4">
+            <button 
+              onClick={() => {
+                setCurrentView('home');
+                setSidebarOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all ${currentView === 'home' ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
+            >
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${currentView === 'home' ? 'bg-white text-emerald-600' : 'bg-white/10'}`}>
+                <Icons.Home size={18} />
+              </div>
+              <span className="font-bold text-sm tracking-widest uppercase">Beranda</span>
+            </button>
+          </div>
+
           {/* Main Menu */}
           <div className="space-y-0.5">
             <label className="px-3 text-[9px] font-black opacity-40 uppercase tracking-[0.2em] mb-1.5 block">Informasi SPMB</label>
