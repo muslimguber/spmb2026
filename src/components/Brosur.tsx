@@ -9,6 +9,8 @@ interface ModulProps {
   username: string;
   userClass: string;
   moduleNumber: number;
+  searchQuery?: string;
+  onRedirect?: (moduleNum: number, pageNum?: number) => void;
   onComplete: () => void;
 }
 

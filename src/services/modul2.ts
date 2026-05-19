@@ -14,9 +14,9 @@ export const modul2Service = {
         content: `
 1. **Akreditasi A**: Menjamin kualitas pendidikan yang sesuai standar nasional.
 2. **Guru Profesional**: Tenaga pendidik yang berpengalaman dan kompeten di bidangnya.
-3. **Fasilitas**: Laboratorium IPA, Komputer, Perpustakaan.
+3. **Fasilitas**: Laboratorium IPA, Komputer, Perpustakaan,.
 4. **Program Ekstrakurikuler Variatif**: Tari, Silat, Marching Band, Pramuka, PMR, PiK-R, dan Pembinaan Olimpiade.
-5. **Prestasi Gemilang**: Di tingkat Kabupaten, Provinsi, hingga Nasional.
+5. **Prestasi Gemilang**: Di tingkat Kabupaten, Provinsi. hingga Nasional
 `
       }
     ]

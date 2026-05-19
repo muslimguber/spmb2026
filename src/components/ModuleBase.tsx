@@ -56,6 +56,7 @@ interface ModuleBaseProps {
   searchQuery?: string;
   onComplete: () => void;
   onRedirect?: (moduleNum: number, pageNum?: number) => void;
+  hideTabs?: boolean;
   service: {
     getIntroduction: () => ModuleData;
   };
@@ -69,7 +70,8 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   searchQuery, 
   onComplete,
   onRedirect,
-  service 
+  service,
+  hideTabs
 }) => {
   const data = React.useMemo(() => service.getIntroduction(), [service]);
   const [activePage, setActivePage] = useState(0);
@@ -210,33 +212,35 @@ export const ModuleBase: React.FC<ModuleBaseProps> = ({
   return (
     <div className="max-w-3xl mx-auto min-h-[80vh] flex flex-col pb-10">
       {/* Navbar Tabs */}
-      <div className="flex justify-center w-full gap-1 md:gap-2 mb-8 px-2 py-2">
-        {data.pages.map((page, index) => {
-          const isUnlocked = true;
-          const isActive = activePage === index;
+      {!hideTabs && (
+        <div className="flex justify-center w-full gap-1 md:gap-2 mb-8 px-2 py-2">
+          {data.pages.map((page, index) => {
+            const isUnlocked = true;
+            const isActive = activePage === index;
 
-          return (
-            <motion.button
-              key={index}
-              layout
-              onClick={() => {
-                setActivePage(index);
-                setQuizActive(false);
-                setQuizSelected(null);
-              }}
-              className={`h-10 rounded-lg text-[10px] md:text-xs font-black transition-all flex items-center justify-center px-3 relative overflow-hidden min-w-0 shadow-sm ${
-                isActive 
-                  ? 'bg-white text-emerald-600 shadow-xl z-10' 
-                  : 'bg-white/30 text-white hover:bg-white/40 shadow-md flex-1'
-              }`}
-            >
-              <span className="whitespace-nowrap uppercase tracking-tighter">
-                {page.title}
-              </span>
-            </motion.button>
-          );
-        })}
-      </div>
+            return (
+              <motion.button
+                key={index}
+                layout
+                onClick={() => {
+                  setActivePage(index);
+                  setQuizActive(false);
+                  setQuizSelected(null);
+                }}
+                className={`h-10 rounded-lg text-[10px] md:text-xs font-black transition-all flex items-center justify-center px-3 relative overflow-hidden min-w-0 shadow-sm ${
+                  isActive 
+                    ? 'bg-white text-emerald-600 shadow-xl z-10' 
+                    : 'bg-white/30 text-white hover:bg-white/40 shadow-md flex-1'
+                }`}
+              >
+                <span className="whitespace-nowrap uppercase tracking-tighter">
+                  {page.title}
+                </span>
+              </motion.button>
+            );
+          })}
+        </div>
+      )}
 
       <div className="flex-1 flex flex-col justify-center">
         <AnimatePresence mode="wait">

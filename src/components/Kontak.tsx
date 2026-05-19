@@ -14,5 +14,5 @@ interface ModulProps {
 }
 
 export const Kontak: React.FC<ModulProps> = (props) => (
-  <ModuleBase {...props} service={modul5Service} />
+  <ModuleBase {...props} service={modul5Service} hideTabs />
 );
