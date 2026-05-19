@@ -15,17 +15,17 @@ interface ModulProps {
 const BROSUR_IMAGES = [
   {
     id: 1,
-    title: 'Halaman 1',
+    title: 'ONLINE',
     url: 'https://i.ibb.co.com/d4nFSRyL/spmb-2026-1.png'
   },
   {
     id: 2,
-    title: 'Halaman 2',
+    title: 'ALUR',
     url: 'https://i.ibb.co.com/n2KjCyM/spmb-2026-3.png'
   },
   {
     id: 3,
-    title: 'Halaman 3',
+    title: 'DAFTAR ULANG',
     url: 'https://i.ibb.co.com/TqbJ3CF3/SPMB-2026.png'
   }
 ];
@@ -57,18 +57,8 @@ export const Brosur: React.FC<ModulProps> = ({ theme, onComplete }) => {
 
   return (
     <div className="min-h-[80vh] flex flex-col p-4 md:p-8">
-      <div className="mb-6 flex items-center justify-between">
-        <ThemeButton 
-          theme={theme} 
-          variant="secondary" 
-          onClick={onComplete}
-          className="px-4 py-2"
-        >
-          <ArrowLeft size={18} />
-          <span className="hidden xs:inline">Kembali</span>
-        </ThemeButton>
-        <span className="font-black text-white uppercase tracking-widest text-lg md:text-xl text-center flex-1">Brosur SPMB</span>
-        <div className="w-12 md:w-24" /> {/* Spacer */}
+      <div className="mb-6 flex items-center justify-center">
+        <span className="font-black text-white uppercase tracking-widest text-lg md:text-xl text-center">Brosur SPMB</span>
       </div>
 
       <div className="flex bg-black/30 p-1.5 rounded-2xl mb-8 self-center">
