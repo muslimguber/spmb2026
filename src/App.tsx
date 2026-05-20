@@ -332,12 +332,6 @@ const App = () => {
   };
 
   const openModule = (num: number) => {
-    if (num === 6 && !unlockedModules.has(6)) {
-      setShowPasswordModal(6);
-      setPasswordInput('');
-      setPasswordError(false);
-      return;
-    }
     setActiveModule(num);
     setCurrentView('modul');
     setSidebarOpen(false);
@@ -479,7 +473,7 @@ const App = () => {
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${currentView === 'modul' && activeModule === mod.id ? 'bg-white text-indigo-600' : 'bg-white/10'}`}>
-                      {mod.id === 6 && !unlockedModules.has(6) ? (
+                      {mod.id === 4 || mod.id === 6 ? (
                         <Icons.Lock size={15} className="text-amber-400" />
                       ) : (
                         currentView === 'modul' && activeModule === mod.id ? <Icons.BookOpen size={18} /> : (
@@ -501,7 +495,7 @@ const App = () => {
                       <span className="font-bold text-sm">{mod.name}</span>
                     </div>
                   </div>
-                  {mod.id === 6 && !unlockedModules.has(6) && (
+                  {(mod.id === 4 || mod.id === 6) && (
                     <Icons.Lock size={12} className="text-amber-400 opacity-60" />
                   )}
                 </button>
@@ -670,7 +664,6 @@ const App = () => {
                 <Home 
                   setSidebarOpen={setSidebarOpen} 
                   onSelectModule={openModule}
-                  isBrosurLocked={!unlockedModules.has(6)}
                 />
               </div>
             )}
