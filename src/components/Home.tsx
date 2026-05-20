@@ -5,19 +5,20 @@ import * as Icons from 'lucide-react';
 interface HomeProps {
   setSidebarOpen: (open: boolean) => void;
   onSelectModule: (num: number) => void;
+  isBrosurLocked?: boolean;
 }
 
 /**
  * Home component for the dashboard screen after login.
  */
-export const Home: React.FC<HomeProps> = ({ setSidebarOpen, onSelectModule }) => {
+export const Home: React.FC<HomeProps> = ({ setSidebarOpen, onSelectModule, isBrosurLocked }) => {
   const navItems = [
     { id: 1, name: 'IDENTITAS', icon: Icons.User },
     { id: 2, name: 'KEUNGGULAN', icon: Icons.Award },
     { id: 3, name: 'PENDAFTARAN', icon: Icons.BookOpen },
     { id: 4, name: 'PERSYARATAN', icon: Icons.CheckCircle2 },
     { id: 5, name: 'KONTAK', icon: Icons.Phone },
-    { id: 6, name: 'BROSUR', icon: Icons.FileText },
+    { id: 6, name: 'BROSUR', icon: isBrosurLocked ? Icons.Lock : Icons.FileText },
   ];
 
   return (
@@ -54,7 +55,7 @@ export const Home: React.FC<HomeProps> = ({ setSidebarOpen, onSelectModule }) =>
         className="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-white/10"
       >
         <img 
-          src="https://i.ibb.co.com/d4nFSRyL/spmb-2026-1.png" 
+          src="https://i.ibb.co.com/3YTCSLHt/Salinan-dari-SPMB-2026-3.png" 
           alt="Brosur Utama" 
           className="w-full h-auto object-cover"
           referrerPolicy="no-referrer"
@@ -75,14 +76,19 @@ export const Home: React.FC<HomeProps> = ({ setSidebarOpen, onSelectModule }) =>
             <button
               key={item.id}
               onClick={() => onSelectModule(item.id)}
-              className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 hover:scale-[1.03] active:scale-[0.97] transition-all group"
+              className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 hover:scale-[1.03] active:scale-[0.97] transition-all group relative"
             >
               <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-2 group-hover:bg-white/20 transition-colors">
-                <item.icon size={20} className="text-white" />
+                <item.icon size={20} className={item.id === 6 && isBrosurLocked ? "text-amber-400" : "text-white"} />
               </div>
-              <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-white/80 group-hover:text-white transition-colors">
+              <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-white/80 group-hover:text-white transition-colors text-center">
                 {item.name}
               </span>
+              {item.id === 6 && isBrosurLocked && (
+                <div className="absolute top-2.5 right-2.5 bg-amber-500/20 text-amber-400 p-1 rounded-md" title="Terkunci">
+                  <Icons.Lock size={10} />
+                </div>
+              )}
             </button>
           ))}
         </div>

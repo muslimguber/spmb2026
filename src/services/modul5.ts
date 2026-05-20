@@ -11,7 +11,7 @@ export const modul5Service = {
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
   <a href="https://wa.me/6281378206174" target="_blank" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all group">
     <div>
-      <p class="text-sm font-black uppercase tracking-tight">Abdul Rohim</p>
+      <p class="text-sm font-black uppercase tracking-tight">Abd.Rohim</p>
       <p class="text-xs opacity-80 font-mono">0813-7820-6174</p>
     </div>
     <div class="bg-white/20 p-2 rounded-lg">

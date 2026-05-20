@@ -332,6 +332,12 @@ const App = () => {
   };
 
   const openModule = (num: number) => {
+    if (num === 6 && !unlockedModules.has(6)) {
+      setShowPasswordModal(6);
+      setPasswordInput('');
+      setPasswordError(false);
+      return;
+    }
     setActiveModule(num);
     setCurrentView('modul');
     setSidebarOpen(false);
@@ -469,26 +475,35 @@ const App = () => {
               <React.Fragment key={mod.id}>
                 <button 
                   onClick={() => openModule(mod.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all ${currentView === 'modul' && activeModule === mod.id ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
+                  className={`w-full flex items-center justify-between px-3 py-1.5 rounded-xl transition-all ${currentView === 'modul' && activeModule === mod.id ? 'bg-white/20 shadow-lg' : 'hover:bg-white/5 opacity-60 hover:opacity-100'}`}
                 >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${currentView === 'modul' && activeModule === mod.id ? 'bg-white text-indigo-600' : 'bg-white/10'}`}>
-                    {currentView === 'modul' && activeModule === mod.id ? <Icons.BookOpen size={18} /> : (
-                      !logoError ? (
-                        <img 
-                          src="https://i.ibb.co.com/kVLW5n61/logo-smpn-1-bengkalis-kecil-Copy.png" 
-                          alt="Logo SMP" 
-                          className="w-5 h-5 object-contain"
-                          referrerPolicy="no-referrer"
-                          onError={() => setLogoError(true)}
-                        />
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${currentView === 'modul' && activeModule === mod.id ? 'bg-white text-indigo-600' : 'bg-white/10'}`}>
+                      {mod.id === 6 && !unlockedModules.has(6) ? (
+                        <Icons.Lock size={15} className="text-amber-400" />
                       ) : (
-                        <Icons.School size={16} className="opacity-50" />
-                      )
-                    )}
+                        currentView === 'modul' && activeModule === mod.id ? <Icons.BookOpen size={18} /> : (
+                          !logoError ? (
+                            <img 
+                              src="https://i.ibb.co.com/kVLW5n61/logo-smpn-1-bengkalis-kecil-Copy.png" 
+                              alt="Logo SMP" 
+                              className="w-5 h-5 object-contain"
+                              referrerPolicy="no-referrer"
+                              onError={() => setLogoError(true)}
+                            />
+                          ) : (
+                            <Icons.School size={16} className="opacity-50" />
+                          )
+                        )
+                      )}
+                    </div>
+                    <div className="flex flex-col items-start text-left">
+                      <span className="font-bold text-sm">{mod.name}</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col items-start text-left">
-                    <span className="font-bold text-sm">{mod.name}</span>
-                  </div>
+                  {mod.id === 6 && !unlockedModules.has(6) && (
+                    <Icons.Lock size={12} className="text-amber-400 opacity-60" />
+                  )}
                 </button>
                 {idx < 5 && (
                   <div className="mx-6 my-0.5">
@@ -655,6 +670,7 @@ const App = () => {
                 <Home 
                   setSidebarOpen={setSidebarOpen} 
                   onSelectModule={openModule}
+                  isBrosurLocked={!unlockedModules.has(6)}
                 />
               </div>
             )}
